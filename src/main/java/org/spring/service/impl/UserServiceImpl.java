@@ -26,11 +26,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        userDao.saveUser(user);
 
     }
 
     @Override
     public void deleteUser(User user) {
+    }
 
+    @Override
+    public User loginUser(String email, String password) {
+        return userDao.loginUser(email,password);
     }
 }

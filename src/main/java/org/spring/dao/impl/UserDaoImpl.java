@@ -1,22 +1,18 @@
 package org.spring.dao.impl;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.spring.dao.UserDao;
-import org.spring.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Primary;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Service;
-
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.spring.dao.UserDao;
+import org.spring.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserDaoImpl implements UserDao {
@@ -43,17 +39,55 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) {
+    public User loginUser(String email, String password) {
+        Session session = null;
+        try{
+            session = sessionFactory.getObject().getCurrentSession();
+        }catch (HibernateException e){
+            session = sessionFactory.getObject().openSession();
+        }
 
+        String sql = "FROM User U where U.email=:email AND U.password=:password";
+        Query query = session.createQuery(sql);
+        query.setParameter("email",email);
+        query.setParameter("password",password);
+        User user =  (User) query.getSingleResult();
+        return user;
     }
 
     @Override
-    public User getUser(Long id) {
+    public void saveUser(User user) {
+        Session session = null;
+        try{
+           session = sessionFactory.getObject().getCurrentSession();
+        }catch (HibernateException e){
+            session = sessionFactory.getObject().openSession();
+        }
+        session.save(user);
+    }
+
+
+    @Override
+    public User getUserById(Long id) {
+//        Session session = null;
+//        try{
+//            session = sessionFactory.getObject().getCurrentSession();
+//        }catch (HibernateException e){
+//            session = sessionFactory.getObject().openSession();
+//        }
+//        User user = session.get(User.class, id);
         return null;
     }
 
     @Override
     public void deleteUser(User user) {
-
+//        Session session = null;
+//        try{
+//            session = sessionFactory.getObject().getCurrentSession();
+//        }catch (HibernateException e){
+//            session = sessionFactory.getObject().openSession();
+//        }
+//        User deleteUser = session.byId(User.class).load(user.getId());
+//        session.delete(deleteUser);
     }
 }

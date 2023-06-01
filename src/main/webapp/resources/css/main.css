@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F6F7FB;
+}
+.main{
+    display: flex;
+}
+.sidebar{
+    width: 300px;
+    height: 100vh;
+    background-color: #404E67;
+    border-right: 1px solid #dce0e8;
+    padding: 10px;
+}
+.main_content{
+    width: 100%;
+}
+
+.nav_bar{
+    background-color: #fff;
+    border-bottom: 0;
+    box-shadow: 0 0 2rem 0 rgba(33, 37, 41, 0.1);
+    height:60px;
+}
+.profile{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.alert-bottom-border {
+    border-bottom: 2px solid #C4DFDF;
+}

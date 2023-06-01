@@ -9,4 +9,6 @@ public interface UserService {
     public  User getUserById(Long id);
     public  void saveUser(User user);
     public void deleteUser(User user);
+
+    public  User loginUser(String email, String password);
 }

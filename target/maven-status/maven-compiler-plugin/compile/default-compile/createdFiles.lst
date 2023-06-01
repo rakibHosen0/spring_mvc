@@ -1,11 +1,11 @@
-org\spring\config\AppConfig.class
-org\spring\service\UserService.class
-org\spring\entity\User.class
-org\spring\service\impl\UserServiceImpl.class
 org\spring\config\RootConfig.class
 org\spring\config\WebMvcConfig.class
 org\spring\dao\UserDao.class
+org\spring\config\AppConfig.class
+org\spring\service\UserService.class
 org\spring\controllers\UserController.class
 org\spring\dao\impl\UserDaoImpl.class
+org\spring\entity\User.class
+org\spring\service\impl\UserServiceImpl.class
 org\spring\config\MysqlConfig.class
 org\spring\controllers\HomeController.class

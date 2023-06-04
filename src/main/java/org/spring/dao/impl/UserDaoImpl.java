@@ -69,25 +69,39 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(Long id) {
-//        Session session = null;
-//        try{
-//            session = sessionFactory.getObject().getCurrentSession();
-//        }catch (HibernateException e){
-//            session = sessionFactory.getObject().openSession();
-//        }
-//        User user = session.get(User.class, id);
-        return null;
+        Session session = null;
+        try{
+            session = sessionFactory.getObject().getCurrentSession();
+        }catch (HibernateException e){
+            session = sessionFactory.getObject().openSession();
+        }
+        User user = session.get(User.class, id);
+        return user;
     }
 
     @Override
-    public void deleteUser(User user) {
-//        Session session = null;
-//        try{
-//            session = sessionFactory.getObject().getCurrentSession();
-//        }catch (HibernateException e){
-//            session = sessionFactory.getObject().openSession();
-//        }
-//        User deleteUser = session.byId(User.class).load(user.getId());
-//        session.delete(deleteUser);
+    public void deleteUserById(Long id) {
+        Session session = null;
+        try{
+            session = sessionFactory.getObject().getCurrentSession();
+        }catch (HibernateException e){
+            session = sessionFactory.getObject().openSession();
+        }
+        User deleteUser = session.load(User.class,id);
+        session.delete(deleteUser);
     }
+
+    @Override
+    public User updateUserById(Long id){
+        Session session = null;
+        try{
+            session = sessionFactory.getObject().getCurrentSession();
+        }catch (HibernateException e){
+            session = sessionFactory.getObject().openSession();
+        }
+        User updateUser = session.get(User.class,id);
+        session.persist(updateUser);
+        return null;
+    }
+
 }

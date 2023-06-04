@@ -1,6 +1,7 @@
 package org.spring.controllers;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.spring.dto.LoginDto;
 import org.spring.dto.UserDto;
 import org.spring.entity.User;
 import org.spring.service.UserService;
@@ -8,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
+@Validated
 @RequestMapping("/user")
 public class UserController {
 
@@ -49,34 +51,28 @@ public class UserController {
     }
 @GetMapping("/login")
     public String loginForm(Model model){
-        UserDto userDto = new UserDto();
-        model.addAttribute("userDto",userDto);
+        LoginDto loginDto = new LoginDto();
+        model.addAttribute("loginDto",loginDto);
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @RequestParam String email,
-                        @RequestParam String password,
+    public String login(@Valid
+                        @ModelAttribute("loginDto") LoginDto loginDto,
                         BindingResult result,
                         HttpSession session
                        ){
-
         if(result.hasErrors()){
             return "login";
         }
-        User user = userService.loginUser(email,password);
+        User user = userService.loginUser(loginDto.getEmail(),loginDto.getPassword());
         UserDto userDto = new UserDto();
         userDto.setUserName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setRePassword(user.getPassword());
-
-        if(userDto != null){
-            session.setAttribute("userDto",userDto);
-            return "profile";
-        }
-//        return "redirect:/user/profile";
-        return "redirect:/user/login";
+        session.setAttribute("userDto",userDto);
+        return "profile";
     }
     @GetMapping("/profile")
     public String profile(Model model){
@@ -89,5 +85,9 @@ public class UserController {
     public String logout(Model model, HttpSession session){
         session.invalidate();
         return "home";
+    }
+    @GetMapping("/delete/{id}")
+    public void deleteUserById(@PathVariable("id") Long id){
+        userService.deleteUserById(id);
     }
 }

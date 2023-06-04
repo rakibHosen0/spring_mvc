@@ -35,8 +35,8 @@
                         <td>${user.email}</td>
                         <td></td>
                         <td class="d-flex justify-content-end">
-                            <button class="btn btn-primary px-3 me-3">Edit</button>
-                            <button class="btn btn-danger px-3">Delete</button>
+                            <button  class="btn btn-primary px-3 me-3">Edit</button>
+                            <button class="btn btn-danger px-3"><a class="text-decoration-none text-light" href="/user/delete/${user.id}">Delete</a></button>
                         </td>
                     </tr>
                 </c:forEach>

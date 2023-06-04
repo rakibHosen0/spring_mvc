@@ -21,7 +21,7 @@
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
                 <div class="alert registration-success"  style="display: none" role="alert"></div>
-                <form:form modelAttribute="userDto" class="mx-1 mx-md-4 form" method="post" action="${pageContext.request.contextPath}/user/login">
+                <form:form class="mx-1 mx-md-4 form" method="post" action="${pageContext.request.contextPath}/user/login" modelAttribute="loginDto">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>

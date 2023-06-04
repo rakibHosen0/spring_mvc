@@ -1,12 +1,9 @@
 package org.spring.service.impl;
-
 import org.spring.dao.UserDao;
-import org.spring.dao.impl.UserDaoImpl;
 import org.spring.entity.User;
 import org.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -31,8 +28,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) {
+        public void deleteUserById(Long id) {
+        userDao.deleteUserById(id);
     }
+    @Override
+    public User updateUserById(Long id) {
+        return userDao.updateUserById(id);
+    }
+
 
     @Override
     public User loginUser(String email, String password) {

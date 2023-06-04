@@ -6,9 +6,8 @@
         </form>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item me-3 pt-3">${user.name}</li>
+                <li class="nav-item me-3 pt-3">${userDto.userName}</li>
                 <li class="nav-item">
-
                     <a class="nav-link" href="#"><img class="profile" src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="profile"></a>
                 </li>
 
